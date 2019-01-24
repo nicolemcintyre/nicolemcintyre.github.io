@@ -1,2 +1,2 @@
 # nicolemcintyre.github.io
-GitHub Public Repo
+GitHub Public Page Repo
