@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Shopping Cart</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
+
+
+
 <body>
     <h2>Shopping Cart Project</h2>
 
@@ -14,6 +18,252 @@
             <h3>Shopping Plaza</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate ipsa animi quas illum, amet sequi ducimus asperiores tenetur placeat dolores repudiandae rem.</p>
         </article>
+        <h2 id="add-text"></h2>
+        <h2 id="player"></h2>
+        <button id="btn-test">TEST CLICK</button>
+        <button id="playBtn1">Play As X</button>
+        <button id="playBtn2">Play As O</button>
     </section>
+
+    <script type="text/javascript">
+        console.log("Queen is life!");
+        var text = document.getElementById('add-text');
+        var para = document.getElementsByTagName("p");
+            para[0].innerText = "Song: We Are The Champions";
+        var arr = ['car', 'spaceship', 'pizza', 'simba'];
+
+        for (var i = 0; i < arr.length; i++) {
+            logIt(arr[i]);
+        }
+
+        function logIt(someText) {
+            console.log(someText);
+        }
+        
+        function doesUserHaveAge(num) {
+  if (parseInt(num) > 120) {
+    return false;
+  } else if (num) {
+    return true;
+  }
+  return false;
+}
+
+var donkey = {
+    name: 'Donald Trump',
+    age: 'Too damn old to act as stupid as he does'
+};
+console.log(donkey.name);
+console.log(donkey.age);
+
+var list = [];
+console.log(list);
+
+//fortune teller game
+function magicBall(numKids, partnerName, location, jobTitle) {
+    
+    numKids = parseInt(prompt('Pick a number between 1 and 5'));
+    partnerName = prompt("What's your partners name? ");
+
+    location = prompt('What city would you most like to live in?');
+
+    jobTitle = prompt('What would be your dream job?');
+
+    return `You will be a ${jobTitle} in ${location} and married to ${partnerName} with ${numKids} children.`
+}
+//var pOne = {person: 1};
+//var pTwo = {person: 2};
+
+//var player;
+
+// var whichPlayer = prompt('Are you player one or player two');
+// whichPlayer = whichPlayer.toLowerCase();
+
+// if(whichPlayer === "one"){
+//     player = pOne;
+//     console.log(`I am player ${player.person}`);
+//     document.getElementById('player').innerHTML = 'I am Player One';
+// } else if (whichPlayer === 'two') {
+//     player = pTwo;
+//     console.log(`I am player ${player.person}`);
+//     document.getElementById('player').innerHTML = 'I am Player Two';
+// }
+var player = function (name){
+    console.log(name);
+    return name;
+}
+var playingAs;
+//var gamePiece;
+var pOne = player({player: 1, gamePiece: 'X'});
+var pTwo = player({player: 2, gamePiece: 'O'});
+var players = [pOne, pTwo];
+var playBtn1 = $('#playBtn1');
+var playBtn2 = $('#playBtn2');
+var testLogic = $('#btn-test');
+var gameBoard = [1,2,3,4,5,6,7,8,9];
+
+    function startGame(player){
+        if(player === pOne){
+            playingAs = pOne;
+            console.log(`Playing as player one`);
+            return player;
+        } else if(player === pTwo) {
+            playingAs = pTwo;
+            console.log(`Playing as player two`);
+            return player;
+        } 
+    }
+    function resetGame(){
+        playingAs = '';
+        return playingAs;
+    }
+
+    function setGamePiece(player) {
+        playingAs = player;
+        //set game piece to start player selected
+        //set player to 1
+        player.player = 1;
+        console.log(player);
+        
+        swapPlayer(player);
+        console.log(players);
+        
+        console.log('Below is the gamePiece');
+        console.log(player.gamePiece);
+        
+        
+        gameLogic(player);
+        return playingAs;
+    }   
+    
+    function swapPlayer (player){
+            //set disabled player to 2
+            if (player !== pOne){
+                playingAs = pTwo;
+                console.log(`My Player is: ${playingAs.player}`);
+                return pOne.player = 2;
+            } 
+            if (player === pTwo){
+                playingAs = pOne;
+                console.log(`My Player is: ${playingAs.player}`);
+                return pTwo.player = 2;
+            }
+
+           
+            // switch (num) {
+            //     case 1:
+                    
+            //         break;
+            //     case 2:
+                
+            //         break;
+            
+            // }
+            
+        }
+
+    function gameLogic(player, gamePiece, num){
+        //define counter arr to track num of clicks
+        var moves = [];
+        var num = 1;
+        //start game
+        $(testLogic).each(function(index){
+            $(this).click(function(e) {
+            index++;
+            console.log(index);
+            
+            //set first move to player 1
+            moves.push($(this).val());
+            console.log(moves);
+
+            //if i is odd
+            players.forEach(function(el){
+                            //console.log(playingAs);
+                        //playingAs = players[el]
+                        playingAs = el;
+                        if (playingAs.player === 1 && index % 2 !== 0 ){
+                            console.log(playingAs);
+                            console.log('your move player: ' + playingAs.player);
+                            console.log(playingAs.gamePiece);
+                            console.log('--Change Player--');
+                            return player = playingAs;
+                        }
+                        if (playingAs.player === 2 && index % 2 === 0){
+                            console.log(playingAs);
+                            console.log('your move player: ' + playingAs.player);
+                        console.log(playingAs.gamePiece);
+                        console.log('--Change Player--');
+                            return player = playingAs;
+                            
+                        }
+                        
+                        
+                    });
+            
+                // if(index % 2 !== 0 && player.player === 1){
+                //     console.log('your move player: ' + player.player);
+                //     console.log(player.gamePiece);
+                //     console.log('--Change Player--');
+                // }
+                // //if i is even
+                // if (index % 2 === 0){
+                //     //set player two for even plays
+                    
+                //     //console.log(player);
+                //     console.log('your move player: ' + player.player);
+                //     console.log(player.gamePiece);
+                //     console.log('--Change Player--');
+                    
+                    
+                // }
+                
+            
+
+            // for(let i = 0; i <= gameBoard.length; i++){
+            //     
+            // }
+
+            //  if(player.player === 1){
+            //         console.log('---');
+            //         console.log(player.gamePiece);
+            //         console.log('---');
+
+            //     }
+
+            
+            }); //end of testLogic Click
+        }); //end of each
+
+        //switch piece per click
+        
+    }
+ 
+
+    $('button[id^=play]').click(function(e){
+        //console.log(e);
+        //return event target from click function to 
+        //determine if btn clicked is connected to id set
+        if (e.target.id === 'playBtn1'){
+            console.log('linked player one');
+            setGamePiece(pOne);
+            $('#playBtn1, #playBtn2').attr('disabled', 'disabled');
+
+        }
+        else if (e.target.id === 'playBtn2'){
+            console.log('linked player two');
+            setGamePiece(pTwo);
+            $('#playBtn1, #playBtn2').attr('disabled', 'disabled');
+        }
+        //console.log($(playBtn1).attr('id'));
+        // if($('button[id^=playOne]')){
+        // }
+        // if($('button[id^=playTwo]')){
+        //     console.log('linked player two');
+        // }
+    })
+
+
+    </script>
+    
 </body>
 </html>
